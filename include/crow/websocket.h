@@ -61,13 +61,13 @@ namespace crow
                 template<typename CompletionHandler>
                 void dispatch(CompletionHandler handler)
                 {
-                    adaptor_.get_io_service().dispatch(handler);
+                    boost::asio::dispatch(adaptor_.get_executor(), handler); //.dispatch(handler);
                 }
 
                 template<typename CompletionHandler>
                 void post(CompletionHandler handler)
                 {
-                    adaptor_.get_io_service().post(handler);
+                    boost::asio::post(adaptor_.get_executor(), handler);
                 }
 
                 void send_pong(const std::string& msg)
